@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "scan": {
+    "paths": ["."],
+    "exclude_paths": [
+      "vendor/",
+      "node_modules/",
+      ".git/",
+      "dist/",
+      "build/",
+      "__pycache__/"
+    ],
+    "exclude_files": [
+      "*.min.js",
+      "*.min.css",
+      "*.lock",
+      "go.sum",
+      "package-lock.json"
+    ],
+    "max_file_size_kb": 1024
+  },
+  "allowlist": [
+    {
+      "pattern": "EXAMPLE_.*",
+      "reason": "Placeholder values in documentation"
+    },
+    {
+      "file": "*.test.*",
+      "reason": "Test fixtures with mock credentials"
+    }
+  ],
+  "notify": {
+    "slack_webhook": "",
+    "discord_webhook": ""
+  },
+  "ai": {
+    "provider": "anthropic",
+    "api_key_env": "ANTHROPIC_API_KEY",
+    "model": "claude-sonnet-4-20250514",
+    "max_tokens": 512
+  }
+}

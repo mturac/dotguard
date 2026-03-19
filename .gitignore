@@ -1,0 +1,9 @@
+dotguard
+dotguard.exe
+*.test
+*.out
+dist/
+.dotguard.json
+.env
+.env.*
+!.dotguard.example.json

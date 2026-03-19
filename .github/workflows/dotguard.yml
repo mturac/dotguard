@@ -1,0 +1,45 @@
+name: dotguard
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+jobs:
+  secret-scan:
+    name: Secret Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Install dotguard
+        run: go install github.com/YOUR_USER/dotguard@latest
+
+      - name: Run dotguard
+        run: dotguard ci -json
+        env:
+          NO_COLOR: "1"
+
+      # Optional: Enable AI analysis
+      # - name: Run dotguard with AI
+      #   run: dotguard ci -json -ai
+      #   env:
+      #     NO_COLOR: "1"
+      #     ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      # Optional: Slack notification on failure
+      # - name: Notify on failure
+      #   if: failure()
+      #   run: dotguard ci -notify
+      #   env:
+      #     NO_COLOR: "1"
